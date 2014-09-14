@@ -1,5 +1,5 @@
 # Ignore bundler config
-/.bundle
+# /.bundle
 
 # Ignore the build directory
 /build
@@ -13,3 +13,5 @@
 
 /node_modules
 source/css/var/_sprite.scss
+
+/vender
