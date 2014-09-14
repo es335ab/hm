@@ -13,7 +13,7 @@ npm install -g grunt-cli
 ### Local install
 
 ```sh
-bundle install
+bundle install --path=vender/bundle
 npm install
 ```
 
