@@ -33,8 +33,13 @@ var array = [5, 10, 15];
 var test = require('./test.js');
 
 module.exports = function () {
-  test2 = test;
+  var test2 = test;
   var bb = 'test2bb';
 }
 
-},{"./test.js":2,"jquery":"HlZQrA","underscore":"ZKusGn"}]},{},[1,2,3]);
+},{"./test.js":2,"jquery":"HlZQrA","underscore":"ZKusGn"}],4:[function(require,module,exports){
+module.exports = function () {
+  var test3 = 'test3'
+}
+
+},{}]},{},[1,2,3,4]);
