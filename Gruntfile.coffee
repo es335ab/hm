@@ -24,6 +24,7 @@ module.exports = (grunt) ->
       '<%= path.build %>/img/sprites',
       '<%= path.build %>/html',
       '<%= path.build %>/js/client',
+      '<%= path.build %>/js/mock.js',
       '<%= path.build %>/data'
     ]
 
