@@ -23,7 +23,7 @@ module.exports = (grunt) ->
     clean: [
       '<%= path.build %>/img/sprites',
       '<%= path.build %>/html',
-      '<%= path.build %>/js/common',
+      '<%= path.build %>/js/client',
       '<%= path.build %>/data'
     ]
 
@@ -75,6 +75,11 @@ module.exports = (grunt) ->
 
   # JSモジュール化
     browserify:
+      common:
+        options:
+          require: ['jquery', 'underscore']
+          external: ['<%= path.arc %>/js/**/*']
+
       mockVendor:
         src: [],
         dest: '<%= path.src %>/js/vendor.js'
@@ -88,12 +93,10 @@ module.exports = (grunt) ->
           require: ['jquery', 'underscore']
 
       client:
-        src: ['<%= path.src %>/js/client/**/*'],
+        src: ['<%= path.src %>/js/client/**/*']
         dest: '<%= path.src %>/js/client.js'
         options:
-          external: ['jquery', 'underscore'],
-          watch: true,
-          keepAlive: true
+          external: ['jquery', 'underscore']
 
   # JS結合
   # concat :
@@ -146,5 +149,5 @@ module.exports = (grunt) ->
 
 
   # タスク定義
-  grunt.registerTask 'build', ['middleman:build', 'browserify:buildVender', 'browserify:client', 'copy', 'prettify', 'uglify', 'sprite', 'clean']
+  grunt.registerTask 'build', ['middleman:build', 'browserify:vendor', 'browserify:client', 'copy', 'prettify', 'uglify', 'sprite', 'clean']
   grunt.registerTask 'serve', ['external_daemon:mid_serve', 'browserify:mockVendor', 'browserify:client','sprite', 'watch']
