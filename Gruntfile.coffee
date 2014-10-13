@@ -23,7 +23,7 @@ module.exports = (grunt) ->
     clean: [
       '<%= path.build %>/img/sprites',
       '<%= path.build %>/html',
-      '<%= path.build %>/js/common',
+      '<%= path.build %>/js/client',
       '<%= path.build %>/data'
     ]
 
@@ -65,7 +65,6 @@ module.exports = (grunt) ->
 
   # ここからwatchタスク
 
-
   # バックグラウンドでmiddleman serverを動かす
     external_daemon:
       mid_serve:
@@ -74,11 +73,34 @@ module.exports = (grunt) ->
        options:
          verbose: true
 
+  # JSモジュール化
+    browserify:
+      common:
+        options:
+          require: ['jquery', 'underscore']
+          external: ['<%= path.arc %>/js/**/*']
+
+      mockVendor:
+        src: [],
+        dest: '<%= path.src %>/js/vendor.js'
+        options:
+          require: ['jquery', 'underscore', 'jquery-mockjax']
+
+      vendor:
+        src: [],
+        dest: '<%= path.src %>/js/vendor.js'
+        options:
+          require: ['jquery', 'underscore']
+
+      client:
+        src: ['<%= path.src %>/js/client/**/*']
+        dest: '<%= path.src %>/js/client.js'
+        options:
+          external: ['jquery', 'underscore']
+
   # JS結合
-    concat:
-      dist:
-        src: '<%= path.src %>/js/common/*.js'
-        dest: '<%= path.src %>/js/common.js'
+  # concat :
+  #    '<%= path.src %>/js/main.js', ['<%= path.src %>/js/app.js', '<%= path.src %>/js/vendor.js']
 
   # JS静的構文チェック
     jshint:
@@ -111,15 +133,15 @@ module.exports = (grunt) ->
     watch:
       options:
         spawn: false
-      concat:
+      browserify:
         options:
           livereload: false
-        files: ['<%= path.src %>/js/common/*.js']
-        tasks: ['concat']
+        files: ['<%= path.src %>/js/client/**/*.js']
+        tasks: ['browserify:client']
       js:
         options:
           livereload: false
-        files: ['<%= path.src %>/**/*.js']
+        files: ['<%= path.src %>/common/**/*.js']
         tasks: ['jshint']
       sprite:
         files: ['<%= path.src %>/img/sprites/*']
@@ -127,5 +149,5 @@ module.exports = (grunt) ->
 
 
   # タスク定義
-  grunt.registerTask 'build', ['middleman:build', 'copy', 'prettify', 'concat', 'sprite', 'clean']
-  grunt.registerTask 'serve', ['external_daemon:mid_serve', 'watch']
+  grunt.registerTask 'build', ['middleman:build', 'browserify:vendor', 'browserify:client', 'copy', 'prettify', 'uglify', 'sprite', 'clean']
+  grunt.registerTask 'serve', ['external_daemon:mid_serve', 'browserify:mockVendor', 'browserify:client','sprite', 'watch']
