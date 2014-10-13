@@ -93,14 +93,8 @@ module.exports = (grunt) ->
         options:
           require: ['jquery', 'underscore']
 
-      mockClient:
-        src: ['<%= path.src %>/js/client/**/*']
-        dest: '<%= path.src %>/js/client.js'
-        options:
-          external: ['jquery', 'underscore']
-
       client:
-        src: ['<%= path.src %>/js/client/**/*', '!<%= path.src %>/js/mock.js']
+        src: ['<%= path.src %>/js/client/**/*']
         dest: '<%= path.src %>/js/client.js'
         options:
           external: ['jquery', 'underscore']
@@ -157,4 +151,4 @@ module.exports = (grunt) ->
 
   # タスク定義
   grunt.registerTask 'build', ['middleman:build', 'browserify:vendor', 'browserify:client', 'copy', 'prettify', 'uglify', 'sprite', 'clean']
-  grunt.registerTask 'serve', ['external_daemon:mid_serve', 'browserify:mockVendor', 'browserify:mockClient','sprite', 'watch']
+  grunt.registerTask 'serve', ['external_daemon:mid_serve', 'browserify:mockVendor', 'browserify:client','sprite', 'watch']
