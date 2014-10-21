@@ -4,7 +4,61 @@
 
 @import "normalize";
 @import "compass";
+@import url(http://fonts.googleapis.com/css?family=Karla);
 
+//var
+$accentColor: #D5810F;
+
+//reset
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #231f20;
+  background-color: #fff;
+  line-height: 1.7em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1,h2,h3,h4,h5 {
+  margin: 0;
+  padding: 0;
+}
 a {
+  color: #345;
+  text-decoration: none;
+}
+
+//conv
+.vaT {
+  vartical-align: top;
+}
+
+.taC {
+  text-align: center;
+}
+
+//module
+.in {
+  margin: 0 auto;
+  width: 1048px;
   @include pie-clearfix();
+}
+
+//layout
+.ly-lpHeader {
+  background: $accentColor;
+  margin-bottom: 80px;
+  .in {
+    background-image: url(../img/lp/bg-lptop.jpg);
+    height: 356px;
+  }
+  .siteTitle {
+    padding: 30px;
+    font-weight: normal;
+    a {
+      color: #fff;
+      font-size: 46px;
+      font-family: 'Karla';
+    }
+  }
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= data.page.title %> | Middleman Product</title>
+  <link rel="stylesheet" href="/css/common.css">
+  <% data.page.css.length.times do |i| %>
+    <link rel="stylesheet" href="/css/<%= data.page.css[i] %>">
+  <% end %>
+  <!--[if lt IE 9]>
+  <script src="/js/lib/html5shiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <%= partial "layouts/partials/header" %>
+  <div class="ly-wrapper">
+    <%= yield %>
+  </div><!-- / .ly-wrapper -->
+
+  <%= partial "layouts/partials/footer" %>
+
+  <script src="/js/vendor.js"></script>
+  <script src="/js/mock.js"></script>
+  <script src="/js/client.js"></script>
+
+  <% data.page.scripts.length.times do |i| %>
+    <script src="/js/<%= data.page.scripts[i] %>"></script>
+  <% end %>
+</body>
+</html>
