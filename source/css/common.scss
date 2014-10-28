@@ -4,18 +4,18 @@
 
 @import "normalize";
 @import "compass";
-@import url(http://fonts.googleapis.com/css?family=Karla);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 
 //var
-$accentColor: #D5810F;
+$accentColor: #eb5e28;
 
 //reset
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "ff-tisa-sans-web-pro", Arial, sans-serif;
   font-size: 14px;
   color: #231f20;
   background-color: #fff;
-  line-height: 1.7em;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -44,21 +44,52 @@ a {
   @include pie-clearfix();
 }
 
+.btn {
+  @include border-radius(8px);
+  @include inline-block();
+  padding: 5px 10px 4px;
+  text-align: center;
+  font-weight: bold;
+  transition: 300ms;
+  &.is-resist {
+    background-color: $accentColor;
+
+    color: #fff;
+    font-size: 22px;
+    padding: 7px 26px 9px;
+    &:hover {
+      color: $accentColor;
+      background-color: #fff;
+    }
+  }
+}
+
 //layout
 .ly-lpHeader {
-  background: $accentColor;
+  background-color: $accentColor;
+  background-image: url(../img/lp/bg-lptop.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 450px;
   margin-bottom: 80px;
   .in {
-    background-image: url(../img/lp/bg-lptop.jpg);
-    height: 356px;
+    text-align: center;
   }
   .siteTitle {
-    padding: 30px;
+    padding: 60px 0 40px;
     font-weight: normal;
     a {
       color: #fff;
       font-size: 46px;
-      font-family: 'Karla';
+      font-weight: bold;
     }
   }
+  .copyText {
+    color: #fff;
+    font-size: 54px;
+    padding-bottom: 30px;
+    font-weight: bold;
+  }
 }
+
+
